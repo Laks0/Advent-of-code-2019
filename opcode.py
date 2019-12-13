@@ -28,7 +28,7 @@ def getParameter(value, mode, code, rel):
 
 def calculate(c, inp):
 	code = c[:]
-	out = 0
+	out = []
 	i = 0
 	ins = 0
 	rel = 0
@@ -62,14 +62,13 @@ def calculate(c, inp):
 			to = code[i+1]#getParameter(code[i+1], m[1], code, rel)
 			if m[1] == 2:
 				to = rel + code[i+1]
-			code[to] = inp[ins]
+			code[to] = inp#inp[ins]
 			ins += 1
 			i += 2
 
 		if m[0] == 4:
 			to = getParameter(code[i+1], m[1], code, rel)
-			print(to)
-			out = to
+			out.append(to)
 			i += 2
 
 		if m[0] == 5:

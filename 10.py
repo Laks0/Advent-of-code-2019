@@ -34,8 +34,10 @@ def getAsteroids(x, y):
 	for y2, l in enumerate(map):
 		for x2, c in enumerate(l):
 			if c != ".":
-				angle = math.degrees(math.atan2(y2 - y, x2 - x))
-				if angle != 0 or (y2 == y and x < x2):
+				angle = math.degrees(math.atan2(y2 - y, x2 - x)) + 90
+				if angle < 0: angle = abs(angle) + 270
+				if angle != 90 or (y == y2 and x < x2):
+					map[y2][x2] = math.floor(angle)
 					angles[angle] = [x2,y2]
 	return angles
 
@@ -43,5 +45,8 @@ def getAngles():
 	return sorted (getAsteroids(maxX, maxY).keys())
 
 angles = getAngles()
+asteroids = getAsteroids(maxX, maxY)
 
-print(angles)
+print(len(angles))
+
+print(asteroids[angles[201]])
