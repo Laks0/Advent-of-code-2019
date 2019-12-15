@@ -1,5 +1,37 @@
 import math
 
+# Day 11
+out = []
+pos = [0, 0]
+direction = 0
+
+panel = {(0, 0) : 1}
+
+def rotate(d):
+	global direction
+	direction += d - 1 + d
+	if direction < 0:
+		direction = 3
+	if direction > 3:
+		direction = 0
+
+	if direction == 0:
+		pos[1] -= 1
+	if direction == 1:
+		pos[0] += 1
+	if direction == 2:
+		pos[1] += 1
+	if direction == 3:
+		pos[0] -= 1
+
+def paint():
+	global out
+	panel[ (pos[0], pos[1]) ] = out[0]
+
+	rotate(out[1])
+
+	out = []
+
 def fillMemory(code, v):
 	for i in range(len(code), v + 1):
 		code.append(0)
@@ -26,9 +58,8 @@ def getParameter(value, mode, code, rel):
 	elif mode == 2:
 		return code[value + rel]
 
-def calculate(c, inp):
+def calculate(c):
 	code = c[:]
-	out = []
 	i = 0
 	ins = 0
 	rel = 0
@@ -62,8 +93,12 @@ def calculate(c, inp):
 			to = code[i+1]#getParameter(code[i+1], m[1], code, rel)
 			if m[1] == 2:
 				to = rel + code[i+1]
-			code[to] = inp#inp[ins]
-			ins += 1
+			p = 0
+			if (pos[0], pos[1]) in panel:
+				p = panel[(pos[0], pos[1])]
+			code[to] = p
+			#code[to] = inp[ins]
+			#ins += 1
 			i += 2
 
 		if m[0] == 4:
@@ -131,4 +166,9 @@ def calculate(c, inp):
 
 			i += 2
 
-	return out
+		#Day 11
+		if len(out) == 2:
+			paint()
+
+	#return out
+	return panel
