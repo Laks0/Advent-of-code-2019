@@ -42,11 +42,8 @@ def getAsteroids(x, y):
 	return angles
 
 def getAngles():
-	return sorted (getAsteroids(maxX, maxY).keys())
+	asteroids = getAsteroids(maxX, maxY)
+	return sorted (asteroids.keys()), asteroids
 
-angles = getAngles()
-asteroids = getAsteroids(maxX, maxY)
+asteroids, angles = getAngles()
 
-print(len(angles))
-
-print(asteroids[angles[201]])

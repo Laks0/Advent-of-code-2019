@@ -77,4 +77,4 @@ while len(totalReq) > 0:
 			ore += int(i.split()[0])
 			totalReq.remove(i)
 
-print(ore)
+print(ore, extra)
